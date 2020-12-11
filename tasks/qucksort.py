@@ -1,50 +1,28 @@
-ar = [1, 48, 42, 20, 21, 46, 48, 26, 42, 44]
+def quicksort(nums, start = 0, end = None):
 
-def f(nums):
-#  print(f'ar:{ar}\nnums:{nums}')
-  if len(nums) < 3: 
-    if len(nums) == 1:
-      print(nums[0])
-    if len(nums) == 2:
-      if nums[1] > nums[0]:
-        print(nums[0])
-        print(nums[1])
-      else:
-        print(nums[1])
-        print(nums[0])
+  if end == None:
+    end = len(nums) - 1
+
+  if start >= end:
     return
 
-  i = 0
-  j = len(nums) - 1
-  pivot = nums[-1]
-  while i < j:
-    # print(f'i={i} j={j} pivot={pivot}')
-    # sleep(.5)
-    if nums[i] <= pivot: 
-      i += 1
-    elif nums[j] > pivot: 
-      j -= 1
-    else:
-      nums[i], nums[j] = nums[j], nums[i]
+  pivot = nums[end]
+  left = start
+  right = end
+  
+  while left < right:
 
-  f(nums[:i])
-  f(nums[i:])
+    while nums[left] < pivot:
+      left += 1
 
-f(ar)
+    while nums[right] > pivot:
+      right -= 1
 
-def quicksort(nums, fst, lst):
-  if fst >= lst: return
+    if left != right:
+      nums[left], nums[right] = nums[right], nums[left]
 
-  i, j = fst, lst
-  pivot = nums[lst]
+      if nums[left] == nums[right]:
+        left += 1
 
-  while i <= j:
-    while nums[i] < pivot:
-      i += 1
-    while nums[j] > pivot:
-      j -= 1
-    if i <= j:
-      nums[i], nums[j] = nums[j], nums[i]
-      i, j = i + 1, j - 1
-  quicksort(nums, fst, j)
-  quicksort(nums, i, lst)
+  quicksort(nums, start, left - 1)
+  quicksort(nums, left + 1, end)
