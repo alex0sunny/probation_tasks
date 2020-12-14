@@ -9,7 +9,6 @@ def quicksort(ar, ranges = None):
     pivot = ar[end]
     left = start
     right = end
-    pivot = ar[end]
     while left < right:
       while ar[left] < pivot:
         left += 1
