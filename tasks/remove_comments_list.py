@@ -1,33 +1,19 @@
 def remove_comments(source):
-    default = 0
-    single_comment = 1
-    multi_comment = 2
-    mode = default
+    block = False
     res = []
     for line in source:
-        if mode == single_comment:
-            mode = default
-        line_out = ''
-        max_pos = len(line) - 1
+        if block == False:
+            line_out = ''
         pos = 0
-        while pos <= max_pos:
-            sym = line[pos]
-            if mode == default:
-                if sym == '/' and pos < max_pos and \
-                        line[pos + 1] in ['/', '*']:
-                    sym += line[pos + 1]
-                    pos += 1
-                if sym == '//':
-                    mode = single_comment
-                elif sym == '/*':
-                    mode = multi_comment
-                else:
-                    line_out += sym
-            elif mode == multi_comment:
-                if pos < max_pos and line[pos:pos + 2] == '*/':
-                    mode = default
-                    pos += 1
-            pos += 1
-        if line_out != '':
+        while pos < len(line) and not (block == False and line[pos:pos + 2] == '//'):
+            switch = line[pos:pos + 2]
+            if block and switch == '*/' or block == False and switch == '/*':
+                block = not block
+                pos += 2
+            else:
+                if block == False:
+                    line_out += line[pos]
+                pos += 1
+        if line_out != '' and block == False:
             res.append(line_out)
     return res
