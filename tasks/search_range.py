@@ -42,3 +42,44 @@ def searchRange(nums, target):
     if 0 <= e <= len(nums) - 1 and nums[s] == nums[e] == target:
         return [s, e]
     return [-1, -1]
+   
+# more verbose yet more effective variant
+def search_range(nums, target):
+    lo = 0
+    hi = len(nums) - 1
+
+    while lo < hi:
+        middle = (lo + hi) // 2
+        if nums[middle] < target:
+            lo = middle + 1
+        elif nums[middle] > target:
+            hi = middle
+        else:   
+            break
+
+    e = lo
+    hi += 1
+
+    while e < hi:
+        middle = (e + hi) // 2
+        if nums[middle] > target:
+            hi = middle
+        else:
+            e = middle + 1
+
+        e -= 1
+
+    if not 0 <= e < len(nums) or nums[e] != target:
+        return [-1, -1]
+
+    s = lo
+    hi = e
+
+    while s < hi:
+        middle = (s + hi) // 2
+        if nums[middle] >= target:
+            hi = middle
+        else:
+            s = middle + 1
+
+    return [s, e]
