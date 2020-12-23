@@ -37,7 +37,7 @@
                 #(+ (f-part % a-right b-right) (f-part (/ 1 %) a-left b-left))))))
 
 (defn f-calc [f] 
-    (* step (reduce + (for [x (range L (+ R step) step)] (f (f-polynome x))))))
+    (* step (reduce + (for [x (range L R step)] (f (f-polynome x))))))
 
 (println (f-calc identity))
 (println (f-calc #(* Math/PI % %)))
