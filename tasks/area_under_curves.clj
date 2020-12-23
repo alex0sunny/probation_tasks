@@ -25,7 +25,7 @@
 
 (defn f-part [x a-list b-list] 
     (reduce + (for [[a b] (map list a-list b-list)] 
-                  (* a (nth (reductions * 1 (repeat x)) b)))))
+                  (* a (nth (reductions * (float 1) (repeat (float x))) b)))))
 
 (def f-polynome 
     (if-not (neg? (first b-list)) #(f-part % a-list b-list) 
