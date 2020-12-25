@@ -22,11 +22,11 @@ def nextPermutation(nums):
   for i in range(len(nums) - 1, -1, -1):
     if i == 0 or nums[i - 1] < nums[i]:
       break
-    for j in range(0, (len(nums) - i) // 2):
-      nums[i + j], nums[-j - 1] = nums[-j - 1], nums[i + j]
-    if i == 0:
+  for j in range(0, (len(nums) - i) // 2):
+    nums[i + j], nums[-j - 1] = nums[-j - 1], nums[i + j]
+  if i == 0:
+    return
+  for j in range(i, len(nums)):
+    if nums[j] > nums[i - 1]:
+      nums[i - 1], nums[j] = nums[j], nums[i - 1]
       return
-    for j in range(i, len(nums)):
-      if nums[j] > nums[i - 1]:
-        nums[i - 1], nums[j] = nums[j], nums[i - 1]
-        return
