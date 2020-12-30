@@ -12,8 +12,7 @@ def combination_sum(candidates, target):
     def f(start, target, path):
         if target == 0:
             res.append(path)
-            return
-        if target < 0 or start == len(nums):
+        if target <= 0 or start == len(nums):
             return
         for i in range(start, len(nums)):
             if i == start or nums[i] != nums[i - 1]:
