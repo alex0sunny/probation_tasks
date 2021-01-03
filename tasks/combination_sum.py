@@ -5,18 +5,16 @@
 
 # Note: The solution set must not contain duplicate combinations.
 
-def combination_sum(candidates, target):
-    nums = list(sorted(candidates))
-    res = []
-
-    def f(start, target, path):
-        if target == 0:
-            res.append(path)
-        if target <= 0 or start == len(nums):
-            return
+def f(nums, target, res, start = 0, path = []):
+    if target == 0:
+        res.append(path)
+    if target > 0:
         for i in range(start, len(nums)):
             if i == start or nums[i] != nums[i - 1]:
-                f(i + 1, target - nums[i], path + [nums[i]])
-
-    f(0, target, [])
+                f(nums, target - nums[i], res, i + 1, path + [nums[i]])
+    
+def combination_sum(candidates, target):
+    res = []
+    nums = list(sorted(candidates))
+    f(nums, target, res)
     return res
