@@ -12,9 +12,7 @@ def f(nums, target, res, start = 0, path = []):
         for i in range(start, len(nums)):
             if i == start or nums[i] != nums[i - 1]:
                 f(nums, target - nums[i], res, i + 1, path + [nums[i]])
-    
-def combination_sum(candidates, target):
-    res = []
-    nums = list(sorted(candidates))
-    f(nums, target, res)
     return res
+    
+def combination_sum(nums, target):
+    return f(list(sorted(nums)), target, [])
