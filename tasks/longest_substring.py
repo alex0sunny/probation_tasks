@@ -20,7 +20,7 @@
 # Input: s = ""
 # Output: 0
 
-def lengthOfLongestSubstring(s):
+def longest_substring(s):
     start = l = 0
     for i in range(len(s)):
         while s[i] in s[start:i]:
