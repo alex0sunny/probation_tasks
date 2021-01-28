@@ -1,6 +1,5 @@
-def quicksort(ar, ranges = None): 
-  if ranges == None:
-    ranges = [[0, len(ar) - 1]]
+def quicksort(ar): 
+  ranges = [[0, len(ar) - 1]]
   while ranges != []:
     [start, end] = ranges[0]
     ranges = ranges[1:]
