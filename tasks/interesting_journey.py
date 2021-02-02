@@ -85,17 +85,15 @@ def fl(s, e):
 
 def f ():
   paths = [[start]]
-  towns = set(range(n)) - {start, end}
+  towns = [town for town in range(n) if town not in [start, end]]
   while paths:
     path = paths.pop(0)
     if fl(path[-1], end) <= l:
       return len(path)
-    visited = set()
-    for t in towns:
-      if fl(path[-1], t) <= l:
-        paths.append(path + [t])
-        visited.add(t)
-    towns -= visited
+    for town in towns[:]:
+      if fl(path[-1], town) <= l:
+        paths.append(path + [town])
+        towns.remove(town)
   return -1
 
 print(f())
