@@ -17,7 +17,7 @@
 #                  [9,10,11,12]]
 # Output: [1,2,3,4,8,12,11,10,9,5,6,7]
 
-def spiralOrder(matrix):
+def spiral_order(matrix):
   res = matrix.pop(0)
   while matrix:
     matrix = [[matrix[i][j] for i in range(len(matrix))] 
