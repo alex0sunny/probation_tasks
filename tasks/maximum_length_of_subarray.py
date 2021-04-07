@@ -19,3 +19,34 @@ def find_length(A, B):
       else:
         lc = 0
     return l
+  
+  
+def find_length2(A, B):
+  la = len(A) 
+  lb = len(B)
+  l = 0
+  for s in range(-la, lb):
+      lc = 0
+      for i, j in zip(range(s, s + lb), range(lb)):
+        if 0 <= i < la:
+          if A[i] == B[j]:
+            lc += 1
+            l = max(lc, l)
+          else:
+            lc = 0
+    return l
+
+
+  def find_length3(A, B):
+        la = len(A) 
+        lb = len(B)
+        l = 0
+        for s in range(-la, lb):
+            lc = 0
+            for i, j in zip(range(max(0, s), la), range(max(0, -s), lb)):
+                if A[i] == B[j]:
+                    lc += 1
+                    l = max(lc, l)
+                else:
+                    lc = 0
+        return l
