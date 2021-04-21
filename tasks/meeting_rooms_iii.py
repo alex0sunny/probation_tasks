@@ -40,7 +40,7 @@ def meetingRoomIII(intervals, rooms, ask):
         pts[e] -= 1
     for i in range(1, len(pts)):
         pts[i] += pts[i - 1]
-    pts = [1 if pts[i] == rooms else 0 for i in range(len(pts))]
+    pts = [int(pts[i] == rooms) for i in range(len(pts))]
     incs = pts[:]
     for i in range(1, len(incs)):
         incs[i] += incs[i - 1]
