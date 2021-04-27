@@ -5,13 +5,13 @@ def timeToFlowerTree(father, time):
             if f not in tree:
                 tree[f] = []
             tree[f].append(i)
-    stack = [[0, 0]]
+    nodes = [[0, 0]]
     res = 0
-    while stack:
-        i, t = stack.pop()
+    while nodes:
+        i, t = nodes.pop()
         if i not in tree:
             res = max(t, res)
         else:
             for j in tree[i]:
-                stack.append([j, t + time[j]])
+                nodes.append([j, t + time[j]])
     return res
