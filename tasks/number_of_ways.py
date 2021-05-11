@@ -5,20 +5,29 @@
 # Given two integers steps and arrLen, return the number of ways such that your pointer still at index 0 after exactly steps steps.
 # Since the answer may be too large, return it modulo 10^9 + 7.
 
+# def numWays(steps, arrLen):
+#     dp = [0] * arrLen
+#     cur_steps = 1
+#     dp[0] = dp[1] = 1
+#     while cur_steps < steps:
+#         dp_next = [0] * arrLen
+#         for i in range(arrLen):
+#             dp_next[i] = dp[i]
+#             if i > 0:
+#                 dp_next[i] += dp[i - 1]
+#             if i < arrLen - 1:
+#                 dp_next[i] += dp[i + 1]
+#             if dp[i] == 0:
+#                 break
+#         dp = dp_next
+#         cur_steps += 1
+#     return dp[0] % (10 ** 9 + 7)
+
 def numWays(steps, arrLen):
-    dp = [0] * arrLen
-    cur_steps = 1
-    dp[0] = dp[1] = 1
-    while cur_steps < steps:
-        dp_next = [0] * arrLen
-        for i in range(arrLen):
-            dp_next[i] = dp[i]
-            if i > 0:
-                dp_next[i] += dp[i - 1]
-            if i < arrLen - 1:
-                dp_next[i] += dp[i + 1]
-            if dp[i] == 0:
-                break
-        dp = dp_next
-        cur_steps += 1
-    return dp[0] % (10 ** 9 + 7)
+    mod = 10 ** 9 + 7
+    l = min(arrLen, steps)
+    dp = [0] * (l + 2)
+    dp[1] = 1
+    for _ in range(steps):
+        dp = [0] + [sum(dp[i:i+3]) % mod for i in range(l)] + [0]
+    return dp[1] % mod
