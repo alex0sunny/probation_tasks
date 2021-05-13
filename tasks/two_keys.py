@@ -22,15 +22,26 @@
 # Input: n = 1
 # Output: 0
 
+# def minSteps(n):
+#     steps = 0
+#     d = 1
+#     while d != n:
+#         n = n // d
+#         d = n
+#         for k in range(2, n):
+#             if n % k == 0:
+#                 d = k
+#                 break
+#         steps += d
+#     return steps
+
 def minSteps(n):
-    steps = 0
-    d = 1
-    while d != n:
-        n = n // d
-        d = n
-        for k in range(2, n):
-            if n % k == 0:
-                d = k
-                break
-        steps += d
-    return steps
+    if n < 2:
+        return 0
+    elif n == 2:
+        return 2
+    else:
+        ds = [i for i in range(3, n // 2 + 1) if n % i == 0]
+        if not ds:
+            return n
+        return min([n // d + minSteps(d) for d in ds])
