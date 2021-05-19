@@ -82,18 +82,21 @@ def fl(s, e):
 	[x1, y1] = coords_list[s]
 	[x2, y2] = coords_list[e]
 	return abs(x2-x1) + abs(y2-y1)
-
-def f ():
-  paths = [[start]]
+def f():
+  pts = [start]
+  cur_len = 0
   towns = [town for town in range(n) if town not in [start, end]]
-  while paths:
-    path = paths.pop(0)
-    if fl(path[-1], end) <= l:
-      return len(path)
-    for town in towns[:]:
-      if fl(path[-1], town) <= l:
-        paths.append(path + [town])
-        towns.remove(town)
+  while pts:
+    next_pts = []
+    for pt in pts:
+      if fl(pt, end) <= l:
+        return cur_len + 1
+      for town in towns[:]:
+        if fl(pt, town) <= l:
+          next_pts.append(town)
+          towns.remove(town)
+    cur_len += 1
+    pts = next_pts
   return -1
 
 print(f())
