@@ -82,6 +82,7 @@ def fl(s, e):
 	[x1, y1] = coords_list[s]
 	[x2, y2] = coords_list[e]
 	return abs(x2-x1) + abs(y2-y1)
+
 def f():
   pts = [start]
   cur_len = 0
