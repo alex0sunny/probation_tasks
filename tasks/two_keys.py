@@ -35,13 +35,19 @@
 #         steps += d
 #     return steps
 
+# def minSteps(n):
+#     if n < 2:
+#         return 0
+#     elif n == 2:
+#         return 2
+#     else:
+#         ds = [i for i in range(3, n // 2 + 1) if n % i == 0]
+#         if not ds:
+#             return n
+#         return min([n // d + minSteps(d) for d in ds])
+
 def minSteps(n):
-    if n < 2:
-        return 0
-    elif n == 2:
-        return 2
-    else:
-        ds = [i for i in range(3, n // 2 + 1) if n % i == 0]
-        if not ds:
-            return n
-        return min([n // d + minSteps(d) for d in ds])
+    dp = [0, 0]
+    for i in range(2, n+1):
+        dp.append(min([dp[j] + i // j for j in range(1, i) if i % j == 0]))
+    return dp[n]
