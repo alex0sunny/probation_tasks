@@ -30,7 +30,6 @@ def maxProfit(costPerCut, salePrice, lengths):
     for cur_len in range(1, max(lenghts) + 1):
         n_of_rods = sum([l // cur_len for l in lengths])
         n_of_cuts = sum([max(0, l // cur_len - bool(l % cur_len == 0)) for l in lengths])
-        cur_price = n_of_rods * cur_len * salePrice - n_of_cuts * costPerCut
-        price = max(price, cur_price)
+        price = max(price, n_of_rods * cur_len * salePrice - n_of_cuts * costPerCut)
         cur_len -= 1
     return max(price, 0)
