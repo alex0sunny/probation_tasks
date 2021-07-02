@@ -20,7 +20,7 @@
 # Explanation: The cell (2, 2) is as far as possible from all the land with distance 4.
 
 
-def maxDistance(grid):
+def max_distance(grid):
     n = len(grid)
     pts = [(y, x) for y in range(n) for x in range(n) if grid[y][x]]
     if len(pts) in [0, n * n]:
@@ -33,7 +33,7 @@ def maxDistance(grid):
             for dy, dx in [[1, 0], [0, 1], [-1, 0], [0, -1]]:
                 nx_y = y + dy
                 nx_x = x + dx
-                if 0 <= nx_y < n and 0 <= nx_x < n and grid[nx_y][nx_x] == 0:
+                if 0<=nx_y<n and 0<=nx_x<n and grid[nx_y][nx_x]==0:
                     nx_pts.append((nx_y, nx_x))
                     grid[nx_y][nx_x] = 1
         pts = nx_pts[:]
