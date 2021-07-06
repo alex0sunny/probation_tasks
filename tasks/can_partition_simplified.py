@@ -4,14 +4,13 @@
 def check_partition(nums, cur_sum, target_sum, visited):
     if all(visited):
         return True
+    if cur_sum == 0:
+        cur_sum = target_sum
     for i, num in enumerate(nums):
         if visited[i] or num > cur_sum:
             continue
-        if num == cur_sum:
-            visited[i] = True
-            return check_partition(nums, target_sum, target_sum, visited)
         visited[i] = True
-        if check_partition(nums, cur_sum - num, target_sum, visited):
+        if check_partition(cur_sum - num, target_sum):
             return True
         visited[i] = False
     return False
