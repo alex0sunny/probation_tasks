@@ -66,10 +66,9 @@ class Solution:
     res_path = []
     res_sum = 0
     score = []
-    visited = []
     n = 0
 
-    def allocate(self, i, cur_sum, path):
+    def allocate(self, i, cur_sum, path, visited):
         if i == self.n:
             if cur_sum > self.res_sum:
                 self.res_sum = cur_sum
@@ -78,13 +77,13 @@ class Solution:
         max_sum = cur_sum
         line = self.score[i]
         for j in range(self.n):
-            if not self.visited[j]:
-                self.visited[j] = True
+            if not visited[j]:
+                visited[j] = True
                 path[i] = j
-                nx_sum = self.allocate(i+1, cur_sum+line[j], path)
+                nx_sum = self.allocate(i+1, cur_sum+line[j], path, visited)
                 if nx_sum > max_sum:
                     max_sum = nx_sum
-                self.visited[j] = False
+                visited[j] = False
         return max_sum
 
 
@@ -95,9 +94,9 @@ class Solution:
     def orderAllocation(self, score):
         self.score = score
         self.n = len(score)
-        self.visited = [False] * self.n
+        visited = [False] * self.n
         path = [0] * self.n
-        self.allocate(0, 0, path)
+        self.allocate(0, 0, path, visited)
         return self.res_path
 
 
