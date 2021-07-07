@@ -58,3 +58,49 @@ def allocate_orders(score):
             r = path_sum
             res_path = path
     return res_path
+
+
+# effective solution
+class Solution:
+
+    res_path = []
+    res_sum = 0
+    score = []
+    visited = []
+    n = 0
+
+    def allocate(self, i, cur_sum, path):
+        if i == self.n:
+            if cur_sum > self.res_sum:
+                self.res_sum = cur_sum
+                self.res_path = path[:]
+            return cur_sum
+        max_sum = cur_sum
+        line = self.score[i]
+        for j in range(self.n):
+            if not self.visited[j]:
+                self.visited[j] = True
+                path[i] = j
+                nx_sum = self.allocate(i+1, cur_sum+line[j], path)
+                if nx_sum > max_sum:
+                    max_sum = nx_sum
+                self.visited[j] = False
+        return max_sum
+
+
+    """
+    @param score: When the j-th driver gets the i-th order, we can get score[i][j] points.
+    @return: return an array that means the array[i]-th driver gets the i-th order.
+    """
+    def orderAllocation(self, score):
+        self.score = score
+        self.n = len(score)
+        self.visited = [False] * self.n
+        path = [0] * self.n
+        self.allocate(0, 0, path)
+        return self.res_path
+
+
+solution = Solution()
+assert(solution.orderAllocation([[1,2,4],[7,11,16],[37,29,22]]) == [1,2,0])
+
