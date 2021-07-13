@@ -35,8 +35,14 @@
 #     return r
 
 
-def array_game(arr):
-    return sum(arr) - min(arr) * len(arr)
+# def array_game(arr):
+#     return sum(arr) - min(arr) * len(arr)
+
+
+def array_game(nums):
+    mi = min(nums)
+    nums = [num - mi for num in nums]
+    return sum(nums)
 
 
 assert(array_game([3, 4, 6, 6, 3]) == 7)
