@@ -14,4 +14,4 @@ def rotate(nums, k):
             l = (l-k) % le
         nums[r] = buf
         counter += 1
-        start = l + 1
+        start += 1
