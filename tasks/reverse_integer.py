@@ -19,13 +19,13 @@ def reverse(x):
     return int(st)
 
 
-# # consider that '-' is less than '0'..'9'
-# def reverse(x):
-#     st = '-' * (x < 0) + str(x)[:(0 if x < 0 else None):-1]
-#     if len(st) == len(str(MIN_INT)) and st > str(MIN_INT) or \
-#             len(st) == len(str(MAX_INT)) and st > str(MAX_INT):
-#         return 0
-#     return int(st)
+# consider that '-' is less than '0'..'9'
+def reverse_short(x):
+    st = '-' * (x < 0) + str(x)[:(0 if x < 0 else None):-1]
+    if len(st) == len(str(MIN_INT)) and st > str(MIN_INT) or \
+            len(st) == len(str(MAX_INT)) and st > str(MAX_INT):
+        return 0
+    return int(st)
 
 
 assert reverse(-123) == -321
