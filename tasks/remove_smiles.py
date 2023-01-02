@@ -6,7 +6,6 @@
 
 
 def remove_smiles(s):
-    print('in:', s)
     pos = 0
     out = []
     while pos < len(s):
@@ -22,7 +21,6 @@ def remove_smiles(s):
             pos += 1
         if s[pos-1] not in '(){}[]':
             out.extend(s[back:pos])
-    print('out:', ''.join(out))
     return ''.join(out)
 
 
