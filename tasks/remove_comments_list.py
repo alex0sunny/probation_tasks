@@ -18,7 +18,7 @@ def remove_comments_v0(source):
             res.append(line_out)
     return res
 
-def remove_comments(self, lines):
+def remove_comments(lines):
     s = '\n'.join(lines)
     pos = 0
     out = []
