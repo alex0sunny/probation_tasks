@@ -39,6 +39,9 @@
 # Company
 # Google
 
+MOD = 10 ** 9 + 7
+
+
 def num_of_plans(n, tota_profit, total_cost, profits, costs):
     counters = [[0] * total_cost for _ in range(tota_profit + 2)]
     counters[0][0] = 1
@@ -50,6 +53,7 @@ def num_of_plans(n, tota_profit, total_cost, profits, costs):
                     profit = cur_profit + profits[card_i]
                     if profit > tota_profit + 1:
                         profit = tota_profit + 1
-                        counters[profit][cost] += counters[cur_profit][cur_cost]
-    return sum(counters[-1]) % (10 ** 9 + 7)
+                        counters[profit][cost] = (counters[profit][cost] +
+                                                  counters[cur_profit][cur_cost]) % MOD
+    return sum(counters[-1]) % MOD
 
