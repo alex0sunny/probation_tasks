@@ -39,16 +39,17 @@
 # Company
 # Google
 
-def numOfPlan(n, totalProfit, totalCost, a, b):
-  dp = [[0] * totalCost for _ in range(totalProfit + 2)]
-  dp[0][0] = 1
-  for k in range(n):
-    for i in range(totalCost, -1, -1):
-      cost = i + b[k]
-      if cost < totalCost:
-        for j in range(totalProfit + 1, -1, -1):
-          profit = j + a[k]
-          if profit > totalProfit + 1:
-            profit = totalProfit + 1
-            dp[profit][cost] += dp[j][i]
-  return sum(dp[-1]) % (10 ** 9 + 7)
+def num_of_plans(n, tota_profit, total_cost, profits, costs):
+    counters = [[0] * total_cost for _ in range(tota_profit + 2)]
+    counters[0][0] = 1
+    for card_i in range(n):
+        for cur_cost in range(total_cost, -1, -1):
+            cost = cur_cost + costs[card_i]
+            if cost < total_cost:
+                for cur_profit in range(tota_profit + 1, -1, -1):
+                    profit = cur_profit + profits[card_i]
+                    if profit > tota_profit + 1:
+                        profit = tota_profit + 1
+                        counters[profit][cost] += counters[cur_profit][cur_cost]
+    return sum(counters[-1]) % (10 ** 9 + 7)
+
