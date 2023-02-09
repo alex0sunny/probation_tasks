@@ -42,17 +42,17 @@
 MOD = 10 ** 9 + 7
 
 
-def num_of_plans(n, tota_profit, total_cost, profits, costs):
-    counters = [[0] * total_cost for _ in range(tota_profit + 2)]
+def num_of_plans(n, total_profit, total_cost, profits, costs):
+    counters = [[0] * total_cost for _ in range(total_profit + 2)]
     counters[0][0] = 1
     for card_i in range(n):
         for cur_cost in range(total_cost, -1, -1):
             cost = cur_cost + costs[card_i]
             if cost < total_cost:
-                for cur_profit in range(tota_profit + 1, -1, -1):
+                for cur_profit in range(total_profit + 1, -1, -1):
                     profit = cur_profit + profits[card_i]
-                    if profit > tota_profit + 1:
-                        profit = tota_profit + 1
+                    if profit > total_profit + 1:
+                        profit = total_profit + 1
                         counters[profit][cost] = (counters[profit][cost] +
                                                   counters[cur_profit][cur_cost]) % MOD
     return sum(counters[-1]) % MOD
